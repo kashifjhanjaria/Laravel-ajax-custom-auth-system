@@ -19,6 +19,7 @@ Route::get('/register', [UserController::class, 'register']);
 Route::get('/reset', [UserController::class, 'reset']);
 Route::post('/register', [UserController::class, 'saveUser'])->name('auth.register');
 Route::post('/login', [UserController::class, 'login'])->name('auth.login');
+Route::post('/forget', [UserController::class, 'forgetPassword'])->name('auth.forget');
 
 Route::group(['middleware' => ['LoginCheck']], function () {
     Route::get('/', [UserController::class, 'index']);

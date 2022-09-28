@@ -10,7 +10,7 @@
                         <h2 class="fw-blod">Forget Password</h2>
                     </div>
                     <div class="card-body p-5">
-                        <form action="#s" method="POST" id="forget_form">
+                        <form method="POST" id="forget_form">
                             @csrf
                             <div class="mb-3 text-secondary">
                                 Enter your e-mail address and we will send you a link for reset your password
@@ -42,6 +42,21 @@
 
 @section('script')
     <script>
-        // alert("Hello");
+        $(function() {
+            $("#forget_form").submit(function(e) {
+                e.preventDefault();
+                $("#forget_btn").val("Please Wait...");
+
+                $.ajax({
+                    url: "{{ route('auth.forget') }}",
+                    method: "POST",
+                    data: $(this).serialize(),
+                    dataType: "JSON",
+                    success: function(response) {
+                        console.log(response);
+                    }
+                })
+            })
+        })
     </script>
 @endsection
